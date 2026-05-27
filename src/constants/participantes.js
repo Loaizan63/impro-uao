@@ -8,6 +8,7 @@ export const PARTICIPANTES = [
   { id: 7, nombre: "Sebastian", foto: "/sebastian.jpeg" },
   { id: 8, nombre: "Santiago", foto: "/santiago.jpeg" },
   { id: 9, nombre: "Nata", foto: "/nata.jpeg" },
+  { id: 10, nombre: "Manuela", foto: "/manuela.jpeg" },
 ];
 
 export const ESTADO_INICIAL = {

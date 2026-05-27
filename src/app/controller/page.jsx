@@ -81,34 +81,41 @@ export default function ControllerPage() {
 
         {estado.escena !== 3 && (
           <section className="bg-white p-6 border-4 border-black shadow-[8px_8px_0_0_rgba(0,0,0,1)]">
-            <h2 className="text-2xl font-black uppercase mb-6 border-b-2 border-black pb-2">1. Seleccionar Sospechosos (Escena 1)</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-              {PARTICIPANTES.map(actor => (
-                <button
-                  key={actor.id}
-                  onClick={() => toggleActor(actor.id)}
-                  className={`p-4 font-black text-xl uppercase border-4 transition-all text-left ${
-                    estado.seleccionados.includes(actor.id)
-                      ? 'bg-black text-white border-black'
-                      : 'bg-white text-black border-black hover:bg-neutral-200'
-                  }`}
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="relative w-16 h-16 shrink-0 overflow-hidden border-2 border-current bg-neutral-200">
-                      <Image
-                        src={actor.foto}
-                        alt={actor.nombre}
-                        fill
-                        sizes="64px"
-                        className="object-cover"
-                      />
-                    </div>
-                    <span className="leading-tight">{actor.nombre}</span>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </section>
+              <h2 className="text-2xl font-black uppercase mb-6 border-b-2 border-black pb-2">1. Seleccionar Sospechosos (Escena 1)</h2>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                {(() => {
+                  // Mostrar a Manuela primero en el panel de control para encontrarla rápido
+                  const ordered = [
+                    ...PARTICIPANTES.filter(p => p.nombre.toLowerCase() === 'manuela'),
+                    ...PARTICIPANTES.filter(p => p.nombre.toLowerCase() !== 'manuela')
+                  ];
+                  return ordered.map(actor => (
+                    <button
+                      key={actor.id}
+                      onClick={() => toggleActor(actor.id)}
+                      className={`p-4 font-black text-xl uppercase border-4 transition-all text-left ${
+                        estado.seleccionados.includes(actor.id)
+                          ? 'bg-black text-white border-black'
+                          : 'bg-white text-black border-black hover:bg-neutral-200'
+                      }`}
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="relative w-16 h-16 shrink-0 overflow-hidden border-2 border-current bg-neutral-200">
+                          <Image
+                            src={actor.foto}
+                            alt={actor.nombre}
+                            fill
+                            sizes="64px"
+                            className="object-cover"
+                          />
+                        </div>
+                        <span className="leading-tight">{actor.nombre}</span>
+                      </div>
+                    </button>
+                  ));
+                })()}
+              </div>
+            </section>
         )}
 
         <section className="bg-white p-6 border-4 border-black shadow-[8px_8px_0_0_rgba(0,0,0,1)] transition-opacity">
